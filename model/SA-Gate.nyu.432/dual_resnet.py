@@ -303,7 +303,6 @@ def load_dualpath_model(model, model_file, is_restore=False):
     if isinstance(model_file, str):
         raw_state_dict = torch.load(model_file)
 
-
         if 'model' in raw_state_dict.keys():
             raw_state_dict = raw_state_dict['model']
     else:

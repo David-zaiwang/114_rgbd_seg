@@ -14,7 +14,7 @@ import torch.backends.cudnn as cudnn
 from config import config
 from dataloader import get_train_loader
 from network import DeepLab
-from nyu import NYUv2
+from nyu_lite import NYUv2
 from utils.init_func import init_weight, group_weight
 from engine.lr_policy import WarmUpPolyLR
 from engine.engine import Engine
@@ -30,7 +30,7 @@ except ImportError:
 
 parser = argparse.ArgumentParser()
 
-os.environ['MASTER_PORT'] = '169711'
+os.environ['MASTER_PORT'] = '225704'
 
 with Engine(custom_parser=parser) as engine:
     args = parser.parse_args()

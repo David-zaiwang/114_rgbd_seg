@@ -9,6 +9,7 @@ from collections import OrderedDict
 from config import config
 from dual_resnet import resnet101
 
+
 class _FCNHead(nn.Module):
     def __init__(self, in_channels, channels, norm_layer=nn.BatchNorm2d, bn_momentum=0.003):
         super(_FCNHead, self).__init__()
@@ -24,13 +25,14 @@ class _FCNHead(nn.Module):
     def forward(self, x):
         return self.block(x)
 
+
 class DeepLab(nn.Module):
     def __init__(self, out_planes, criterion, norm_layer, pretrained_model=None):
         super(DeepLab, self).__init__()
         self.backbone = resnet101(pretrained_model, norm_layer=norm_layer,
-                                bn_eps=config.bn_eps,
-                                bn_momentum=config.bn_momentum,
-                                deep_stem=True, stem_width=64)
+                                  bn_eps=config.bn_eps,
+                                  bn_momentum=config.bn_momentum,
+                                  deep_stem=True, stem_width=64)
         self.dilate = 2
 
         for m in self.backbone.layer4.children():
@@ -43,18 +45,16 @@ class DeepLab(nn.Module):
         self.business_layer.append(self.head)
         self.criterion = criterion
 
-
     def forward(self, data, hha, label=None):
         b, c, h, w = data.shape
         blocks, merges = self.backbone(data, hha)
         pred, aux_fm = self.head(merges)
         pred = F.interpolate(pred, size=(h, w), mode='bilinear', align_corners=True)
-        aux_fm = F.interpolate(aux_fm, size=(h, w), mode='bilinear',  align_corners=True)
+        aux_fm = F.interpolate(aux_fm, size=(h, w), mode='bilinear', align_corners=True)
 
-        if label is not None:       # training
+        if label is not None:  # training
             loss = self.criterion(pred, label)
             loss_aux = self.criterion(aux_fm, label)
-
             return loss, loss_aux
 
         return pred
@@ -109,7 +109,7 @@ class ASPP(nn.Module):
         # Map convolutions
         out = torch.cat([m(x) for m in self.map_convs], dim=1)
         out = self.map_bn(out)
-        out = self.leak_relu(out)       # add activation layer
+        out = self.leak_relu(out)  # add activation layer
         out = self.red_conv(out)
 
         # Global pooling
@@ -146,6 +146,7 @@ class ASPP(nn.Module):
             pool = nn.functional.pad(pool, pad=padding, mode="replicate")
         return pool
 
+
 class Head(nn.Module):
     def __init__(self, classify_classes, norm_act=nn.BatchNorm2d, bn_momentum=0.0003):
         super(Head, self).__init__()
@@ -157,7 +158,7 @@ class Head(nn.Module):
             nn.Conv2d(256, 48, 1, bias=False),
             norm_act(48, momentum=bn_momentum),
             nn.ReLU(),
-            )
+        )
 
         self.last_conv = nn.Sequential(nn.Conv2d(304, 256, kernel_size=3, stride=1, padding=1, bias=False),
                                        norm_act(256, momentum=bn_momentum),
@@ -169,7 +170,7 @@ class Head(nn.Module):
                                        )
 
         self.classify = nn.Conv2d(in_channels=256, out_channels=self.classify_classes, kernel_size=1,
-                                        stride=1, padding=0, dilation=1, bias=True)
+                                  stride=1, padding=0, dilation=1, bias=True)
 
         self.auxlayer = _FCNHead(2048, classify_classes, bn_momentum=bn_momentum, norm_layer=norm_act)
 
@@ -191,10 +192,11 @@ class Head(nn.Module):
         aux_fm = self.auxlayer(encoder_out)
         return pred, aux_fm
 
+
 if __name__ == '__main__':
     model = DeepLab(40, criterion=nn.CrossEntropyLoss(),
-                pretrained_model=None,
-                norm_layer=nn.BatchNorm2d)
+                    pretrained_model=None,
+                    norm_layer=nn.BatchNorm2d)
     left = torch.randn(2, 3, 128, 128)
     right = torch.randn(2, 3, 128, 128)
 
