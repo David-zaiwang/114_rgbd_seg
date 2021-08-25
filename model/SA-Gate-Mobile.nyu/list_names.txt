@@ -1,0 +1,13 @@
+'wall','floor','cabinet','bed','chair',[5]'sofa','table','door','window','bookshelf',[10]'picture','counter','blinds',[13]
+                'desk','shelves',[15]'curtain','dresser','pillow','mirror','floor mat',[20]'clothes','ceiling','books','refridgerator',[24]
+                'television',[25]'paper','towel','shower curtain','box','whiteboard',[30]'person','night stand','toilet',[33]
+                'sink','lamp',[35]'bathtub','bag','otherstructure','otherfurniture','otherprop'[40]
+
+
+
+
+
+“墙”，“地板”，“柜子”，“床”，“椅子”，“沙发”，“桌子”，“门”，“窗户”，“书架”，“图片”，“柜台”，“百叶窗” '，
+                '桌子'，'架子'，'窗帘'，'梳妆台'，'枕头'，'镜子'，'地板垫'，'衣服'，'天花板'，'书本'，'冰箱'，
+                '电视'，'纸'，'毛巾'，'淋浴帘'，'盒子'，'白板'，'人'，'床头柜'，'厕所'，
+                '水槽'，'灯'，'浴缸'，'袋子'，'其他结构'，'其他家具'，'其他道具'

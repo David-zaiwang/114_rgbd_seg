@@ -1,0 +1,1 @@
+/opt/conda/envs/rgbd/bin/python eval.py -e 230 -d 0 --save_path results >> test.log 2>&1

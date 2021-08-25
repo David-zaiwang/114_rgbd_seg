@@ -1,0 +1,1 @@
+/opt/conda/envs/rgbd/bin/python3 network.py >> debug.log 2>&1

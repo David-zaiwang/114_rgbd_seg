@@ -1,0 +1,20 @@
+使用说明
+
+登录贵阳服务器，
+
+cd /CV_personal_zaiwang.gu/projects/ubtech/rgbd_segmentation_lite/model/SA-Gate-Mobile.nyu; mpirun -np 1 --allow-run-as-root -bind-to none -map-by slot -x NCCL_IB_DISABLE=0 -x NCCL_IB_CUDA_SUPPORT=1 -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x HOROVOD_MPI_THREADS_DISABLE=1 -x PATH -x NCCL_SOCKET_IFNAME=^lo,docker0,enp116s0f0,enp116s0f1 -mca pml ob1 -mca btl_tcp_if_exclude docker0,lo,enp116s0f0,enp116s0f1 sh run_mobile.sh
+
+
+使用说明
+# 2021-04-06
+登录贵阳服务器，
+从40类变为了13类
+
+docker ： guiyang-harbor.ubtrobot.com/cv-team/rgbd_seg:v3
+cd /CV_personal_zaiwang.gu/projects/ubtech/rgbd_segmentation_lite/model/SA-Gate-Mobile.nyu; mpirun -np 1 --allow-run-as-root -bind-to none -map-by slot -x NCCL_IB_DISABLE=0 -x NCCL_IB_CUDA_SUPPORT=1 -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x HOROVOD_MPI_THREADS_DISABLE=1 -x PATH -x NCCL_SOCKET_IFNAME=^lo,docker0,enp116s0f0,enp116s0f1 -mca pml ob1 -mca btl_tcp_if_exclude docker0,lo,enp116s0f0,enp116s0f1 sh run_mobile.sh
+
+
+测试代码
+docker ： guiyang-harbor.ubtrobot.com/cv-team/rgbd_seg:v3
+
+cd /CV_personal_zaiwang.gu/projects/ubtech/rgbd_segmentation_lite/model/SA-Gate-Mobile.nyu; mpirun -np 1 --allow-run-as-root -bind-to none -map-by slot -x NCCL_IB_DISABLE=0 -x NCCL_IB_CUDA_SUPPORT=1 -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x HOROVOD_MPI_THREADS_DISABLE=1 -x PATH -x NCCL_SOCKET_IFNAME=^lo,docker0,enp116s0f0,enp116s0f1 -mca pml ob1 -mca btl_tcp_if_exclude docker0,lo,enp116s0f0,enp116s0f1 sh val.sh
