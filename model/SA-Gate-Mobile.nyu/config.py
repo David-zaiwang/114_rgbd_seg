@@ -18,13 +18,14 @@ cfg = C
 C.seed = 12345
 
 remoteip = os.popen('pwd').read()
-C.volna = '/CV_personal_zaiwang.gu/projects/ubtech/'      # this is the path to your repo 'RGBD_Semantic_Segmentation_PyTorch'
+C.volna = '/data/zaiwang/workspace_2021/'      # this is the path to your repo 'RGBD_Semantic_Segmentation_PyTorch'
+
 
 """please config ROOT_dir and user when u first using"""
-C.repo_name = 'rgbd_segmentation_lite'
+C.repo_name = 'rgbd_seg'
 C.abs_dir = osp.realpath(".")
 C.this_dir = C.abs_dir.split(osp.sep)[-1]
-
+print(C.abs_dir)
 
 C.root_dir = C.abs_dir[:C.abs_dir.index(C.repo_name) + len(C.repo_name)]
 C.log_dir = osp.abspath('log')
@@ -40,7 +41,7 @@ C.val_log_file = C.log_dir + '/val_' + exp_time + '.log'
 C.link_val_log_file = C.log_dir + '/val_last.log'
 
 """Data Dir and Weight Dir"""
-C.dataset_path = '/CV_team_data_03/zaiwang/Dataset/NYUDepthv2'
+C.dataset_path = '/data/zaiwang/Dataset/NYUDepthv2'
 C.img_root_folder = C.dataset_path
 C.gt_root_folder = C.dataset_path
 C.hha_root_folder = osp.join(C.dataset_path, 'HHA')
